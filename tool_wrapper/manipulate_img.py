@@ -23,15 +23,25 @@ except shutil.Error:
     logging.warn(f"File already exists in {input_dir}")
 
 if "input_file_arg" in tool:
+    file_name = input_file.split('/')[-1]
     if tool["input_file_arg"]["type"] == "positional":
-        tool_args += f"{input_file.split('/')[-1]} "
+        tool_args += f"{file_name} "
+    elif tool["input_file_arg"]["type"] == "flag":
+        if "format" in tool["input_file_arg"]:
+            file_arg = tool["input_file_arg"]["format"].format(value=file_name)
+        else:
+            file_arg = file_name
+        tool_args += f"{tool['input_file_arg']['flag']} {file_arg} "
 
 for key, param in tool.get("parameters", {}).items():
     value = input(f"{param['description']} ({param['default']}): ")
     if value == "":
         value = param["default"]
+    if "format" in param:
+        value = param["format"].format(value=value)
     tool_args += f"{param['flag']} {value} "
 
+logging.info(f"Running {tool['name']} with args: {tool_args}")
 subprocess.run(
     f"docker-compose run ml {tool_args}",
     cwd=f"{tool_directory_service.tools_dir}/{tool['name']}",
