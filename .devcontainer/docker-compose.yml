@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  ml-main:
+    image: beverts312/machine-learning
+    entrypoint: sleep inf
+    volumes:
+      - /mnt/4c482725-e86b-43a7-912e-6fef20dc2c2d/machine-learning:/home/mluser/repo
+      - ml-cache:/home/mluser/.cache
+      - ml-checkpoints:/home/mluser/checkpoints
+    environment:
+      - NVIDIA_DISABLE_REQUIRE=true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+volumes:
+  ml-cache:
+  ml-checkpoints:

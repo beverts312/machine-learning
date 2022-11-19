@@ -1,0 +1,9 @@
+{
+	"name": "main",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "ml-main",
+	"remoteUser": "mluser",
+	"workspaceFolder": "/home/mluser/repo",
+	"postCreateCommand": "conda env create -f pytorch/environment.yml",
+	"postAttachCommand": "bash -c 'conda activate bailspt'"
+}
