@@ -1,2 +1,6 @@
 name: bg-remover
+type: manipulate_img
 checkpoints: []
+input_file_arg:
+  type: positional
+  position: 1

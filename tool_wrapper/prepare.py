@@ -12,6 +12,7 @@ tool_info_service = ToolInfoService()
 tool_directory_service.prepare_directories()
 
 tool = tool_info_service.select_tool_prompt()
+
 checkpoints = tool.get("checkpoints", [])
 if len(checkpoints) == 0:
     logging.info(f"No checkpoints for {tool['name']}")

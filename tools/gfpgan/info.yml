@@ -1,4 +1,5 @@
 name: gfpgan
+type: manipulate_img
 checkpoints:
   - name: GFPGANv1.3.pth
     url: https://s3.us-east-1.wasabisys.com/super-ml/cp/GFPGANv1.3.pth
