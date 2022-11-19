@@ -11,12 +11,16 @@ class ToolDirectoryService:
         self.working_volume_dir = os.path.join(self.volumes_dir, "working")
         self.checkpoint_volume_dir = os.path.join(self.volumes_dir, "checkpoints")
         self.tools_dir = os.path.join(self.base_dir, "tools")
+        self.data_volume_dir = os.path.join(self.volumes_dir, "data")
+        self.cache_volume_dir = os.path.join(self.volumes_dir, "cache")
 
     def prepare_directories(self):
         logging.info("Preparing directories")
         os.makedirs(self.working_volume_dir, exist_ok=True)
         os.makedirs(self.checkpoint_volume_dir, exist_ok=True)
         os.makedirs(self.tools_dir, exist_ok=True)
+        os.makedirs(self.data_volume_dir, exist_ok=True)
+        os.makedirs(self.cache_volume_dir, exist_ok=True)
 
     def add_working_dir(self, dir_name):
         logging.info(f"Adding working directory {dir_name}")

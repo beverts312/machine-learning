@@ -34,9 +34,12 @@ if "input_file_arg" in tool:
         tool_args += f"{tool['input_file_arg']['flag']} {file_arg} "
 
 for key, param in tool.get("parameters", {}).items():
-    value = input(f"{param['description']} ({param['default']}): ")
+    value = input(f"{param['description']} ({param.get('default')}): ")
     if value == "":
-        value = param["default"]
+        if "default" in param:
+            value = param["default"]
+        else:
+            continue
     if "format" in param:
         value = param["format"].format(value=value)
     tool_args += f"{param['flag']} {value} "

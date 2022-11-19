@@ -1,0 +1,37 @@
+name: diffusion-clip
+type: manipulate_img
+checkpoints:
+  - name: 512x512_diffusion.pt
+  - name: celeba-gogh.pth
+  - name: celeba-neanderthal.pth
+  - name: imagenet_cubism_t601.pth
+  - name: imagenet_gogh_t601.pth
+  - name: imagenet_pointillism_t601.pth
+  - name: imagenet_watercolor_t601.pth
+  - name: model_ir_se50.pth
+input_file_arg:
+  type: flag
+  flag: --img_path
+  format: ../working/{value}
+parameters:
+  config:
+    type: choice
+    description: Config Type
+    flag: --config
+    format: '{value}.yml'
+    options:
+      - celeba
+      - imagenet
+      - afhq
+  model:
+    type: choice
+    description: Model to use
+    flag: --model_path
+    format: 'pretrained/{value}.pth'
+    options:
+      - celeba-gogh
+      - celeba-neanderthal
+      - imagenet_cubism_t601
+      - imagenet_gogh_t601
+      - imagenet_pointillism_t601
+      - imagenet_watercolor_t601

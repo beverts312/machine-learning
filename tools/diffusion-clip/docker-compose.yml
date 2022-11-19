@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  ml:
+    build: .
+    image: beverts312/diffusion-clip
+    user: 1000:1000
+    volumes:
+      - ../../volumes/checkpoints:/home/mluser/diffusion-clip/pretrained
+      - ../../volumes/data:/home/mluser/diffusion-clip/data
+      - ../../volumes/working:/home/mluser/working
+      - dc-cache:/home/mluser/.cache
+    environment:
+      - NVIDIA_DISABLE_REQUIRE=true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  dc-cache:
