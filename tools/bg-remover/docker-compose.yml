@@ -1,10 +1,10 @@
 version: "3.9"
 services:
-  bg-remover:
+  ml:
     build: .
     image: beverts312/bg-remover
     volumes:
-      - ../volumes/working:/home/mluser/working
+      - ../../volumes/working:/home/mluser/working
     environment:
       - NVIDIA_DISABLE_REQUIRE=true
     deploy:

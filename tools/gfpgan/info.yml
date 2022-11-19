@@ -1,0 +1,18 @@
+name: gfpgan
+checkpoints:
+  - name: GFPGANv1.3.pth
+    url: https://s3.us-east-1.wasabisys.com/super-ml/cp/GFPGANv1.3.pth
+input_file: True
+input_dir: 'input'
+output_dir: 'output'
+parameters:
+  version:
+    default: 1.3
+    type: str
+    description: GFPGAN version
+    flag: -v
+  upscale_factor:
+    default: 4
+    type: int
+    description: Upscale factor
+    flag: -s
