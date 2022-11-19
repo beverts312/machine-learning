@@ -18,13 +18,21 @@ if len(checkpoints) == 0:
     logging.info(f"No checkpoints for {tool['name']}")
     exit(0)
 
+download_all = input("Download all checkpoints? (y/n): ") == "y"
 for checkpoint in checkpoints:
-    download_checkpoint = input(
-        f"Download checkpoint {checkpoint['name']} for {tool['name']}? [y/N] "
-    )
-    if download_checkpoint.lower() == "y":
+    if not download_all:
+        download_checkpoint = input(
+            f"Download checkpoint {checkpoint['name']} for {tool['name']}? [y/N] "
+        )
+    if download_all or download_checkpoint.lower() == "y":
         logging.info(f"Downloading checkpoint {checkpoint['name']} for {tool['name']}")
-        res = requests.get(checkpoint["url"], stream=True)
+        res = requests.get(
+            checkpoint.get(
+                "url",
+                f"https://s3.us-east-1.wasabisys.com/super-ml/cp/{checkpoint['name']}",
+            ),
+            stream=True,
+        )
         with open(
             f"{tool_directory_service.checkpoint_volume_dir}/{checkpoint['name']}", "wb"
         ) as f:
