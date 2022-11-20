@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  ml:
+    build: .
+    image: beverts312/maxim
+    user: 1000:1000
+    volumes:
+      - ../../volumes/checkpoints:/home/mluser/maxim/pretrained
+      - ../../volumes/working:/home/mluser/working
+    environment:
+      - NVIDIA_DISABLE_REQUIRE=true
+      - XLA_FLAGS=--xla_gpu_strict_conv_algorithm_picker=false
+      # - XLA_PYTHON_CLIENT_PREALLOCATE=false
+      # - XLA_PYTHON_CLIENT_MEM_FRACTION=.10
+      - XLA_PYTHON_CLIENT_ALLOCATOR=platform
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

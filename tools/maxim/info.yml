@@ -1,0 +1,30 @@
+name: maxim
+type: manipulate_img
+checkpoints:
+  - name: Denoising.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Denoising/SIDD/checkpoint.npz
+  - name: Deblurring.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Deblurring/GoPro/checkpoint.npz
+  - name: Deraining-Streak.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Deraining/Rain13k/checkpoint.npz
+  - name: Deraining-Drop.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Deraining/Raindrop/checkpoint.npz
+  - name: Dehazing-Indoor.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Dehazing/SOTS-Indoor/checkpoint.npz
+  - name: Dehazing-Outdoor.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Dehazing/SOTS-Outdoor/checkpoint.npz
+  - name: Enhancement.npz
+    url: https://storage.googleapis.com/gresearch/maxim/ckpt/Enhancement/LOL/checkpoint.npz
+parameters:
+  operation:
+    type: choice
+    description: Operation to perform
+    position: 0
+    options:
+      - Denoising
+      - Deblurring
+      - Deraining-Streak
+      - Deraining-Drop
+      - Dehazing-Indoor
+      - Dehazing-Outdoor
+      - Enhancement
