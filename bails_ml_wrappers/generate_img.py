@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from saas import dall_e
-from script_helpers import configure_logging, ToolDirectoryService
-
+from script_helpers import ToolDirectoryService, configure_logging
 
 configure_logging()
 

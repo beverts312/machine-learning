@@ -1,4 +1,7 @@
 .devcontainer
+.vscode
+bails_ml_wrappers
 mlbase
 pytorch
 tools
+volumes

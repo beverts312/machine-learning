@@ -2,9 +2,16 @@ import os
 
 from invoke import task
 
+docker_username = "beverts312"
+
 
 def get_project_root():
     return os.path.dirname(os.path.realpath(__file__))
+
+
+def docker_build(c, dir, name):
+    with c.cd(f"{get_project_root()}/{dir}"):
+        c.run(f"docker build -t {docker_username}/{name} .")
 
 
 def black(c, check):
@@ -23,3 +30,13 @@ def format(c):
 @task(aliases=["cf", "fc"])
 def check_format(c):
     return black(c, True)
+
+
+@task(aliases=["dbase"])
+def build_base_image(c):
+    docker_build(c, "mlbase", "mlbase")
+
+
+@task(aliases=["dml"])
+def build_ml_image(c):
+    docker_build(c, "", "machine-learning")
