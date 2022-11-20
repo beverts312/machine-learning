@@ -1,5 +1,5 @@
 {
     "python.analysis.extraPaths": [
-        "./tool_wrapper"
+        "./bails_ml_wrappers"
     ]
 }
