@@ -1,6 +1,8 @@
-from glob import glob
 import logging
+from glob import glob
+
 import yaml
+
 from .tool_directory_service import ToolDirectoryService
 
 
@@ -11,7 +13,9 @@ class ToolInfoService:
         self._load_info(tool_type)
 
     def _load_info(self, tool_type):
-        for info_file in glob(f"{self.directory_service.tools_dir}/*/info.yml"):
+        for info_file in glob(
+            f"{self.directory_service.tools_dir}/*/info.yml"
+        ):
             logging.debug(f"Loading info from {info_file}")
             with open(info_file) as f:
                 info = yaml.safe_load(f)

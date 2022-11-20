@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 import logging
-import requests
-from script_helpers import configure_logging, ToolDirectoryService, ToolInfoService
 
+import requests
+from script_helpers import (
+    ToolDirectoryService,
+    ToolInfoService,
+    configure_logging,
+)
 
 configure_logging()
 
@@ -25,7 +29,9 @@ for checkpoint in checkpoints:
             f"Download checkpoint {checkpoint['name']} for {tool['name']}? [y/N] "
         )
     if download_all or download_checkpoint.lower() == "y":
-        logging.info(f"Downloading checkpoint {checkpoint['name']} for {tool['name']}")
+        logging.info(
+            f"Downloading checkpoint {checkpoint['name']} for {tool['name']}"
+        )
         res = requests.get(
             checkpoint.get(
                 "url",
@@ -34,7 +40,8 @@ for checkpoint in checkpoints:
             stream=True,
         )
         with open(
-            f"{tool_directory_service.checkpoint_volume_dir}/{checkpoint['name']}", "wb"
+            f"{tool_directory_service.checkpoint_volume_dir}/{checkpoint['name']}",
+            "wb",
         ) as f:
             for chunk in res.iter_content(chunk_size=1024):
                 if chunk:

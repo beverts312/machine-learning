@@ -1,0 +1,4 @@
+black
+invoke
+isort
+-r requirements.txt

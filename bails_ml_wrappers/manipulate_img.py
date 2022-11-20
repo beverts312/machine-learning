@@ -2,8 +2,12 @@
 import logging
 import shutil
 import subprocess
-from script_helpers import configure_logging, ToolDirectoryService, ToolInfoService
 
+from script_helpers import (
+    ToolDirectoryService,
+    ToolInfoService,
+    configure_logging,
+)
 
 configure_logging()
 
@@ -23,7 +27,7 @@ except shutil.Error:
     logging.warn(f"File already exists in {input_dir}")
 
 if "input_file_arg" in tool:
-    file_name = input_file.split('/')[-1]
+    file_name = input_file.split("/")[-1]
     if tool["input_file_arg"]["type"] == "positional":
         tool_args += f"{file_name} "
     elif tool["input_file_arg"]["type"] == "flag":
