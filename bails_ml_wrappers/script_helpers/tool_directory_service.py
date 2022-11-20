@@ -15,6 +15,7 @@ class ToolDirectoryService:
         self.tools_dir = os.path.join(self.base_dir, "tools")
         self.data_volume_dir = os.path.join(self.volumes_dir, "data")
         self.cache_volume_dir = os.path.join(self.volumes_dir, "cache")
+        self.output_volume_dir = os.path.join(self.volumes_dir, "output")
 
     def prepare_directories(self):
         logging.info("Preparing directories")
@@ -23,6 +24,7 @@ class ToolDirectoryService:
         os.makedirs(self.tools_dir, exist_ok=True)
         os.makedirs(self.data_volume_dir, exist_ok=True)
         os.makedirs(self.cache_volume_dir, exist_ok=True)
+        os.makedirs(self.output_volume_dir, exist_ok=True)
 
     def add_working_dir(self, dir_name):
         logging.info(f"Adding working directory {dir_name}")

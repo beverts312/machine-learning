@@ -1,19 +1,62 @@
 #!/usr/bin/env python3
-from saas import dall_e
-from script_helpers import ToolDirectoryService, configure_logging
+import subprocess
+
+from saas import DallEWrapper
+from script_helpers import (
+    ToolDirectoryService,
+    ToolInfoService,
+    configure_logging,
+)
 
 configure_logging()
 
-saas_generators = {
-    "dall_e": dall_e.generate_image,
-}
-
 directory_service = ToolDirectoryService()
+tool_service = ToolInfoService(
+    "generate_img",
+    {
+        "dall_e": DallEWrapper().get_info(),
+    },
+)
 
+tool = tool_service.select_tool_prompt()
 prompt = input("Prompt: ")
-count = input("Count (per generator if using multiple): ")
 
-for generator_name, generator in saas_generators.items():
-    use_generator = input(f"Use {generator_name}? (y/n): ")
-    if use_generator == "y":
-        generator(prompt, directory_service.working_volume_dir, count)
+parameters = {}
+args_str = ""
+is_docker = "generate" not in tool
+
+if "command" in tool:
+    args_str += f"{tool['command']} "
+
+if is_docker:
+    if "format" in tool["input_prompt_arg"]:
+        prompt = tool["input_prompt_arg"]["format"].format(value=prompt)
+    args_str += f"{tool['input_prompt_arg']['flag']} {prompt} "
+
+for key, parameter in tool.get("parameters", {}).items():
+    parameters[key] = input(
+        f"{parameter['description']} ({parameter.get('default')}): "
+    )
+    if parameters[key] == "":
+        if "default" in parameter:
+            parameters[key] = parameter["default"]
+        else:
+            continue
+    if "format" in parameter:
+        parameters[key] = parameter["format"].format(value=parameters[key])
+    if is_docker:
+        args_str += f"{parameter['flag']} {parameters[key]} "
+
+if is_docker:
+    subprocess.run(
+        f"docker-compose run ml {args_str}",
+        cwd=f"{directory_service.tools_dir}/{tool['name']}",
+        shell=True,
+    )
+else:
+    tool["generate"](
+        prompt,
+        directory_service.working_volume_dir,
+        parameters["count"],
+        parameters["size"],
+    )

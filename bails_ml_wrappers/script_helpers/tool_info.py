@@ -7,9 +7,9 @@ from .tool_directory_service import ToolDirectoryService
 
 
 class ToolInfoService:
-    def __init__(self, tool_type=None):
+    def __init__(self, tool_type=None, other_tools={}):
         self.directory_service = ToolDirectoryService()
-        self.tools = {}
+        self.tools = {**other_tools}
         self._load_info(tool_type)
 
     def _load_info(self, tool_type):

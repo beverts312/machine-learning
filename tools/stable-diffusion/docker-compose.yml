@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  ml:
+    build: .
+    image: beverts312/stable-diffusion
+    volumes:
+      - ../../volumes/checkpoints:/home/mluser/data
+      - ../../volumes/output:/home/mluser/stable-diffusion/outputs/txt2img-samples/
+      - sd-cache:/home/mluser/.cache
+    environment:
+      - NVIDIA_DISABLE_REQUIRE=true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+volumes:
+  sd-cache:

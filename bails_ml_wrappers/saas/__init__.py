@@ -1,1 +1,1 @@
-from .dall_e import generate_image
+from .dall_e import DallEWrapper
