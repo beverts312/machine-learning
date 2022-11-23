@@ -1,5 +1,5 @@
 # https://replicate.com/wonjongg/stylecarigan
-from bails_ml_wrappers.saas.replicate_base import ReplicateBase
+from script_helpers.replicate_base import ReplicateBase
 
 
 class StylecariganReplicate(ReplicateBase):

@@ -1,5 +1,5 @@
 # https://replicate.com/google-research/maxim
-from bails_ml_wrappers.saas.replicate_base import ReplicateBase
+from script_helpers.replicate_base import ReplicateBase
 
 
 class MaximReplicate(ReplicateBase):

@@ -1,5 +1,5 @@
 # https://replicate.com/gwang-kim/diffusionclip
-from bails_ml_wrappers.saas.replicate_base import ReplicateBase
+from script_helpers.replicate_base import ReplicateBase
 
 
 class DiffusionClipReplicate(ReplicateBase):

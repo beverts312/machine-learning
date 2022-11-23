@@ -1,5 +1,5 @@
 # https://replicate.com/mchong6/jojogan
-from bails_ml_wrappers.saas.replicate_base import ReplicateBase
+from script_helpers.replicate_base import ReplicateBase
 
 
 class JojoganReplicate(ReplicateBase):
@@ -26,5 +26,8 @@ class JojoganReplicate(ReplicateBase):
                 disney
         """
         self.predict(
-            image_path, {"pretrained": style, "alpha": 1}, f"_jojogan_{style}", "input_face"
+            image_path,
+            {"pretrained": style, "alpha": 1},
+            f"_jojogan_{style}",
+            "input_face",
         )

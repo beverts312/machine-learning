@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import subprocess
 
-from saas import DallEWrapper
 from script_helpers import (
     ToolDirectoryService,
     ToolInfoService,
     configure_logging,
 )
+from txt_to_image import DallEWrapper
 
 configure_logging()
 

@@ -1,5 +1,5 @@
 # https://replicate.com/rinongal/stylegan-nada
-from bails_ml_wrappers.saas.replicate_base import ReplicateBase
+from script_helpers.replicate_base import ReplicateBase
 
 
 class StyleganNadaReplicate(ReplicateBase):
@@ -23,5 +23,8 @@ class StyleganNadaReplicate(ReplicateBase):
                anime, white_walker, zuckerberg, disney_princess, all
         """
         self.predict(
-            image_path, {"output_style": style}, f"_stylegan_nada_{style}", "input"
+            image_path,
+            {"output_style": style},
+            f"_stylegan_nada_{style}",
+            "input",
         )
