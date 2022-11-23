@@ -1,0 +1,18 @@
+name: real-esrgan
+type: manipulate_img
+checkpoints:
+  - name: RealESRGAN_x4plus.pth
+    url: https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth
+input_dir: 'input'
+output_dir: 'output'
+parameters:
+  upscale_factor:
+    default: 4
+    type: int
+    description: Upscale factor
+    flag: -s
+  face_enhance:
+    default: False
+    type: bool
+    description: Use GFPGAN to enhance faces 
+    flag: --face_enhance

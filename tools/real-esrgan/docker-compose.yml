@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  ml:
+    build: .
+    image: beverts312/real-esrgan
+    volumes:
+      - ../../volumes/checkpoints:/home/mluser/esrgan/weights
+      - ../../volumes/working:/home/mluser/working
+    environment:
+      - NVIDIA_DISABLE_REQUIRE=true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
