@@ -10,7 +10,7 @@ base_headers = {"Authorization": f"Token {os.environ['REPLICATE_API_TOKEN']}"}
 username = input("Replicate username: ")
 model_name = input("Model name: ")
 input_dir = input("Input directory: ")
-class_prompt = input("Class prompt (for examole 'a photo of a person'): ")
+class_prompt = input("Class prompt (for example 'a photo of a person'): ")
 instnace_prompt = input(
     "Instance prompt (for example 'a photo of bge person'): "
 )
