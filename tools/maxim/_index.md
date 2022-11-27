@@ -7,5 +7,7 @@ description: |
 ---
 
 Docker tooling for [google-research/maxim](https://github.com/google-research/maxim).
+
 Put input images in `../../volumes/working/input`.
+
 Run `docker-compose run ml $OPERATION` where `$OPERATION` is one of: `Denoising`, `Deblurring`, `Dehazing-Indoor`, `Deshazing-Outdoor`, `Deraining-Streak`, `Deraining-Drop`, `Enhancement`.
