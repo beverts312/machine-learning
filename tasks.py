@@ -39,4 +39,9 @@ def build_base_image(c):
 
 @task(aliases=["dml"])
 def build_ml_image(c):
-    docker_build(c, "", "machine-learning")
+    docker_build(c, "pytorch", "machine-learning")
+
+
+@task(aliases=["dsuper", "ds"])
+def build_super_image(c):
+    docker_build(c, "", "mlsuper")

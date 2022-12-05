@@ -1,4 +1,4 @@
-name: bailspt
+name: blls
 channels:
   - pytorch
   - defaults
@@ -9,6 +9,7 @@ dependencies:
   - pytorch=1.11.0
   - torchvision=0.12.0
   - numpy=1.19.2
+  - jupyterlab
   - pip:
     - albumentations==0.4.3
     - diffusers
@@ -26,6 +27,15 @@ dependencies:
     - transformers==4.19.2
     - torchmetrics==0.6.0
     - kornia==0.6
-    - streamlit-drawable-canvas==0.8
     - -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
     - -e git+https://github.com/openai/CLIP.git@main#egg=clip
+    - -e /home/mluser/deforum
+    - -r /home/mluser/machine-learning/dev-requirements.txt
+    - gfpgan
+    - gradio
+    - scipy
+    - basicsr
+    - facexlib
+    - backgroundremover
+    - basic-pitch
+    - google-colab
