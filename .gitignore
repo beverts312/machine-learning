@@ -2,3 +2,9 @@ volumes
 *.pyc
 __pycache__
 venv
+
+# temp
+.locks
+models--TheBloke--Llama-2-7b-fp16
+tmp*
+.aws-sam

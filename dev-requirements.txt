@@ -1,4 +1,5 @@
 black
+diagrams
 invoke
 isort
 -r requirements.txt

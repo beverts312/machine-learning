@@ -1,0 +1,8 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "sagemaker-test"
+resolve_s3 = true
+s3_prefix = "sagemaker-test"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM CAPABILITY_NAMED_IAM"
+image_repositories = []

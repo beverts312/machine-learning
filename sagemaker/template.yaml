@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Sagemaker Demo
+
+Parameters:
+  ImageUri:
+    Type: String
+
+  ModelBucket:
+    Type: String
+
+  DataPath:
+    Type: String
+
+Resources:
+  LlamaModelRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LlamaModelRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - sagemaker.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSageMakerFullAccess
+      Policies:
+        - PolicyName: SageMakerS3Access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource:
+                  - !Sub "arn:aws:s3:::${ModelBucket}/*"
+
+  LlamaModel:
+    Type: AWS::SageMaker::Model
+    Properties:
+      ModelName: b4llz-llama-2
+      ExecutionRoleArn: !GetAtt LlamaModelRole.Arn
+      PrimaryContainer:
+        Image: !Ref ImageUri
+        ModelDataUrl: !Sub s3://${ModelBucket}/${DataPath}
+
+  LlamaEndpointConfig:
+    Type: AWS::SageMaker::EndpointConfig
+    Properties:
+      EndpointConfigName: LlamaEndpointConfig
+      ProductionVariants:
+        - VariantName: LlamaVariant
+          ModelName: !GetAtt LlamaModel.ModelName
+          ServerlessConfig:
+            MemorySizeInMB: 2048
+            MaxConcurrency: 1
+
+  SageMakerEndpoint:
+    Type: AWS::SageMaker::Endpoint
+    Properties:
+      EndpointName: b4llz-llama-2
+      EndpointConfigName: !GetAtt LlamaEndpointConfig.EndpointConfigName
